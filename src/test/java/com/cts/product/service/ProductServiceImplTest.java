@@ -51,10 +51,10 @@ public class ProductServiceImplTest {
 		options = Optional.of(product);
 	}
 
-	@Test
-	public void testProductServiceImpl() {
-		fail("Not yet implemented");
-	}
+	//@Test
+	//public void testProductServiceImpl() {
+		//fail("Not yet implemented");
+	//}
 
 	@Test
 	public void testRegisterProduct() throws ProductAlreadyExistsException {

@@ -81,9 +81,5 @@ public class SupplierServiceImplTest {
 		assertEquals(supplier, fetchedsupplier);
 	}
 
-	//@Test
-	//public void testSupplierServiceImpl() {
-		// fail("Not yet implemented");
-	//}
 
 }

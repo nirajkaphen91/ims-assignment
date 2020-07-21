@@ -1,6 +1,6 @@
 package com.cts.customer.invoice.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -20,10 +20,8 @@ import com.cts.customer.invoice.exception.CustomerInvoiceNotFoundException;
 import com.cts.customer.invoice.model.CustomerInvoice;
 import com.cts.customer.invoice.repository.CustomerInvoiceRepository;
 
-
-
 public class CustomerInvoiceServiceImplTest {
-	
+
 	@Mock
 	private CustomerInvoiceRepository customerInvoiceRepository;
 	private CustomerInvoice customerInvoice;
@@ -31,9 +29,7 @@ public class CustomerInvoiceServiceImplTest {
 	private CustomerInvoiceServiceImpl customerInvoiceService;
 	private List<CustomerInvoice> customerInvoiceList = null;
 	private Optional<CustomerInvoice> options;
-	
-	
-	
+
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
@@ -42,22 +38,21 @@ public class CustomerInvoiceServiceImplTest {
 		customerInvoice.setBilldate(new Date());
 		customerInvoice.setBillamount(600);
 		customerInvoice.setCustomername("johnpass");
+		customerInvoice.setBillno("Aoc001");
 		customerInvoiceList = new ArrayList<>();
 		customerInvoiceList.add(customerInvoice);
 		options = Optional.of(customerInvoice);
 	}
-	
+
 	/*
-	 * private String billno;
-	private Date billdate;
-	private String billamount;
-	private String customername;
+	 * private String billno; private Date billdate; private String billamount;
+	 * private String customername;
 	 */
 
-	//@Test
-	//public void testCustomerInvoiceServiceImpl() {
-		//fail("Not yet implemented");
-	//}
+	// @Test
+	// public void testCustomerInvoiceServiceImpl() {
+	// fail("Not yet implemented");
+	// }
 
 	@Test
 	public void testRegisterCustomerInvoice() throws CustomerInvoiceAlreadyExistsException {
@@ -67,28 +62,31 @@ public class CustomerInvoiceServiceImplTest {
 	}
 
 	@Test
-	public void testUpdateCustomerInvoice()throws CustomerInvoiceNotFoundException {
-		//when(customerInvoiceRepository.findById(customerInvoice.getBillAmount())).thenReturn(options);
-		//when(customerInvoiceRepository.findById(customerInvoice.getBillno())
-		//customerInvoice.setCustomerName("Niraj001");
-		//CustomerInvoice fetchCustomerInvoice = customerInvoiceService.updateCustomerInvoice(customerInvoice.getBillAmount(), customerInvoice);
-		//assertEquals(customerInvoice, fetchCustomerInvoice);
-	}
-	
+	public void testUpdateCustomerInvoice() throws CustomerInvoiceNotFoundException {
+		// when(customerInvoiceRepository.findById(product.getPid())).thenReturn(options);
+		when(customerInvoiceRepository.findById(customerInvoice.getBillno())).thenReturn(options);
+		customerInvoice.setCustomername("johnpass");
+		CustomerInvoice fetchinvoice = customerInvoiceService.updateCustomerInvoice(customerInvoice.getBillno(),
+				customerInvoice);
 
-	//@Test
-	//public void testDeleteCustomerInvoice() throws CustomerInvoiceNotFoundException {
-		//when(customerInvoiceRepository.findById(customerInvoice.getBillno()).thenReturn(options);
-		//boolean flag = customerInvoiceService.deleteCustomerInvoice(customerInvoice.getBillno();
-		//boolean flag = customerInvoiceService.deleteUser(user.getUserId());
-		//assertEquals(true, flag);
-	//}
-
-	//@Test
-	//public void testGetCustomerInvoiceById() throws CustomerInvoiceNotFoundException {
-		//when(customerInvoiceRepository.findById(customerInvoice.getBillNo())).thenReturn(options);
-		//CustomerInvoice fetchCustomerInvoice = customerInvoiceService.getCustomerInvoiceById(customerInvoice.getBillNo());
-		//assertEquals(customerInvoice, fetchCustomerInvoice);
+		assertEquals(customerInvoice, fetchinvoice);
+		// assertEquals(customerInvoice, fetchCustomerInvoice);
 	}
+
+	@Test
+	public void testDeleteCustomerInvoice() throws CustomerInvoiceNotFoundException {
+		when(customerInvoiceRepository.findById(customerInvoice.getBillno()));
+		boolean flag = customerInvoiceService.deleteCustomerInvoice(customerInvoice.getBillno());
+		assertEquals(false, flag);
+	}
+
+	@Test
+	public void testGetCustomerInvoiceById() throws CustomerInvoiceNotFoundException {
+		when(customerInvoiceRepository.findById(customerInvoice.getBillno())).thenReturn(options);
+		CustomerInvoice fetchCustomerInvoice = customerInvoiceService
+				.getCustomerInvoiceById(customerInvoice.getBillno());
+		assertEquals(customerInvoice, fetchCustomerInvoice);
+	}
+}
 
 //}
