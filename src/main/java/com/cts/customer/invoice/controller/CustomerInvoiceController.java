@@ -16,12 +16,8 @@ import com.cts.customer.invoice.exception.CustomerInvoiceNotFoundException;
 import com.cts.customer.invoice.model.CustomerInvoice;
 import com.cts.customer.invoice.service.CustomerInvoiceService;
 
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
 @RestController
-@Api
+
 public class CustomerInvoiceController {
 	private CustomerInvoiceService customerInvoiceService;
 
@@ -30,7 +26,6 @@ public class CustomerInvoiceController {
 		this.customerInvoiceService = customerInvoiceService;
 	}
 
-	@ApiOperation(value = "Register customerInvoice using post url: /customerInvoice/register")
 	@PostMapping("/customerInvoice/register")
 	public ResponseEntity<CustomerInvoice> createCustomerInvoice(@RequestBody CustomerInvoice customerInvoice) {
 		try {
@@ -43,7 +38,6 @@ public class CustomerInvoiceController {
 	}
 
 	@PutMapping("/customerInvoice/{id}")
-	@ApiOperation(value = "Update update using url: /customerInvoice/id")
 	public ResponseEntity<CustomerInvoice> updateProduct(@PathVariable String customerInvoiceId,
 			@RequestBody CustomerInvoice customerInvoice) {
 		try {
@@ -60,7 +54,6 @@ public class CustomerInvoiceController {
 	}
 
 	@DeleteMapping("/customerInvoice/{id}")
-	@ApiOperation(value = "Delete customerInvoice using url: /customerInvoice/id")
 	public ResponseEntity<Void> deleteProduct(@PathVariable String customerInvoiceId) {
 		try {
 			boolean flag = customerInvoiceService.deleteCustomerInvoice(customerInvoiceId);
@@ -76,7 +69,6 @@ public class CustomerInvoiceController {
 	}
 
 	@GetMapping("/customerInvoice/{customerInvoiceId}")
-	@ApiOperation(value = "Get product using url: /customerInvoice/id")
 	public ResponseEntity<CustomerInvoice> getProductById(@PathVariable String customerInvoiceId) {
 		try {
 			CustomerInvoice customerInvoice = customerInvoiceService.getCustomerInvoiceById(customerInvoiceId);

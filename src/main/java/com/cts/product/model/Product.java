@@ -8,69 +8,41 @@ import javax.persistence.Table;
 @Table
 public class Product {
 	@Id
-	private String productId;
-	private String productName;
-	private String productType;
-	private String price;
-	private String description;
-	
-	public Product() {
+	private String pid;
+	private String name;
+	private int price;
+	private String pdescription;
+
+	public String getPid() {
+		return pid;
 	}
 
-	public Product(String productId, String productName, String productType, String price, String description) {
-		super();
-		this.productId = productId;
-		this.productName = productName;
-		this.productType = productType;
-		this.price = price;
-		this.description = description;
+	public void setPid(String pid) {
+		this.pid = pid;
 	}
 
-	public String getProductId() {
-		return productId;
+	public String getName() {
+		return name;
 	}
 
-	public void setProductId(String productId) {
-		this.productId = productId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-	public String getProductType() {
-		return productType;
-	}
-
-	public void setProductType(String productType) {
-		this.productType = productType;
-	}
-
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getPdescription() {
+		return pdescription;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setPdescription(String pdescription) {
+		this.pdescription = pdescription;
 	}
 
-	@Override
-	public String toString() {
-		return "Product [productId=" + productId + ", productName=" + productName + ", productType=" + productType
-				+ ", price=" + price + ", description=" + description + "]";
-	}
-	
-	
-	}
+}

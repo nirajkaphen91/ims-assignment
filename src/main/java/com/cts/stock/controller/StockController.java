@@ -15,11 +15,7 @@ import com.cts.stock.exception.StockNotFoundException;
 import com.cts.stock.model.Stock;
 import com.cts.stock.service.StockService;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
 @RestController
-@Api
 public class StockController {
 
 	private StockService stockService;
@@ -29,7 +25,6 @@ public class StockController {
 		this.stockService = stockService;
 	}
 
-	@ApiOperation(value = "Register stock using post url: /stock/register")
 	@PostMapping("/stock/register")
 	public ResponseEntity<Stock> createStock(@RequestBody Stock stock) {
 		try {
@@ -41,11 +36,11 @@ public class StockController {
 		return new ResponseEntity<Stock>(stock, HttpStatus.CREATED);
 	}
 
-	@PutMapping("/stock/{id}")
-	@ApiOperation(value = "Update update using url: /stock/id")
-	public ResponseEntity<Stock> updateStock(@PathVariable String stockId, @RequestBody Stock stock) {
+	@PutMapping("/stock/{pid}")
+
+	public ResponseEntity<Stock> updateStock(@PathVariable String pid, @RequestBody Stock stock) {
 		try {
-			stock = stockService.updateStock(stockId, stock);
+			stock = stockService.updateStock(pid, stock);
 			if (stock == null) {
 				return new ResponseEntity<Stock>(HttpStatus.NOT_FOUND);
 			} else {
@@ -57,11 +52,11 @@ public class StockController {
 		}
 	}
 
-	@DeleteMapping("/stock/{id}")
-	@ApiOperation(value = "Delete stock using url: /stock/id")
-	public ResponseEntity<Void> deleteProduct(@PathVariable String stockId) {
+	@DeleteMapping("/stock/{pid}")
+
+	public ResponseEntity<Void> deleteProduct(@PathVariable String pid) {
 		try {
-			boolean flag = stockService.deleteStock(stockId);
+			boolean flag = stockService.deleteStock(pid);
 			if (flag) {
 				return new ResponseEntity<Void>(HttpStatus.OK);
 			} else {
@@ -73,11 +68,11 @@ public class StockController {
 		}
 	}
 
-	@GetMapping("/stock/{stockId}")
-	@ApiOperation(value = "Get product using url: /stock/id")
-	public ResponseEntity<Stock> getStockById(@PathVariable String stockId) {
+	@GetMapping("/stock/{pid}")
+
+	public ResponseEntity<Stock> getStockById(@PathVariable String pid) {
 		try {
-			Stock stock = stockService.getStockById(stockId);
+			Stock stock = stockService.getStockById(pid);
 			if (stock == null) {
 				return new ResponseEntity<Stock>(HttpStatus.NOT_FOUND);
 			} else {

@@ -15,11 +15,7 @@ import com.cts.supplier.exception.SupplierNotFoundException;
 import com.cts.supplier.model.Supplier;
 import com.cts.supplier.service.SupplierService;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
 @RestController
-@Api
 public class SupplierController {
 	
 	private SupplierService supplierService;
@@ -29,7 +25,7 @@ public class SupplierController {
 		this.supplierService = supplierService;
 	}
 	
-	@ApiOperation(value = "Register supplier using post url: /supplier/register")
+	
 	@PostMapping("/supplier/register")
 	public ResponseEntity<Supplier> createSupplier(@RequestBody Supplier supplier) {
 		try {
@@ -41,11 +37,11 @@ public class SupplierController {
 		return new ResponseEntity<Supplier>(supplier, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/supplier/{id}")
-	@ApiOperation(value = "Update update using url: /supplier/id")
-	public ResponseEntity<Supplier> updateSupplier(@PathVariable String supplierId, @RequestBody Supplier supplier) {
+	@PutMapping("/supplier/{sid}")
+	
+	public ResponseEntity<Supplier> updateSupplier(@PathVariable String sid, @RequestBody Supplier supplier) {
 		try {
-			supplier = supplierService.updateSupplier(supplierId, supplier);
+			supplier = supplierService.updateSupplier(sid, supplier);
 			if (supplier == null) {
 				return new ResponseEntity<Supplier>(HttpStatus.NOT_FOUND);
 			} else {
@@ -57,11 +53,11 @@ public class SupplierController {
 		}
 	}
 
-	@DeleteMapping("/supplier/{id}")
-	@ApiOperation(value = "Delete supplier using url: /supplier/id")
-	public ResponseEntity<Void> deleteSupplier(@PathVariable String supplierId) {
+	@DeleteMapping("/supplier/{sid}")
+
+	public ResponseEntity<Void> deleteSupplier(@PathVariable String sid) {
 		try {
-			boolean flag = supplierService.deleteSupplier(supplierId);
+			boolean flag = supplierService.deleteSupplier(sid);
 			if (flag) {
 				return new ResponseEntity<Void>(HttpStatus.OK);
 			} else {
@@ -73,11 +69,11 @@ public class SupplierController {
 		}
 	}
 
-	@GetMapping("/supplier/{supplierId}")
-	@ApiOperation(value = "Get supplier using url: /supplier/supplierId")
-	public ResponseEntity<Supplier> getSupplierById(@PathVariable String supplierId) {
+	@GetMapping("/supplier/{sid}")
+	
+	public ResponseEntity<Supplier> getSupplierById(@PathVariable String sid) {
 		try {
-			Supplier supplier = supplierService.getSupplierById(supplierId);
+			Supplier supplier = supplierService.getSupplierById(sid);
 			if (supplier == null) {
 				return new ResponseEntity<Supplier>(HttpStatus.NOT_FOUND);
 			} else {

@@ -7,5 +7,5 @@ import com.cts.user.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
-	User findByUserIdAndUserPassword(String userId, String userPassword);
+	User findByIdAndPassword(String id, String password);
 }

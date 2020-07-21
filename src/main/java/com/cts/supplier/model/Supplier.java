@@ -8,57 +8,65 @@ import javax.persistence.Table;
 @Table
 public class Supplier {
 	@Id
-	private String supplierId;
-	private String supplierName;
-	private String supplierCompany;
-	private String supplierAddress;
+	private String sid;
+	private String suppliername;
+	private String suppliercompany;
+	private String supplieraddress;
 
 	public Supplier() {
 	}
 
-	public Supplier(String supplierId, String supplierName, String supplierCompany, String supplydDate) {
-		this.supplierId = supplierId;
-		this.supplierName = supplierName;
-		this.supplierCompany = supplierCompany;
-		this.supplierAddress = supplydDate;
+	
+	
+	public Supplier(String sid, String suppliername, String suppliercompany, String supplieraddress) {
+		super();
+		this.sid = sid;
+		this.suppliername = suppliername;
+		this.suppliercompany = suppliercompany;
+		this.supplieraddress = supplieraddress;
 	}
 
-	public String getSupplierId() {
-		return supplierId;
+
+
+	public String getSid() {
+		return sid;
 	}
 
-	public void setSupplierId(String supplierId) {
-		this.supplierId = supplierId;
+	public void setSid(String sid) {
+		this.sid = sid;
 	}
 
-	public String getSupplierName() {
-		return supplierName;
+	public String getSuppliername() {
+		return suppliername;
 	}
 
-	public void setSupplierName(String supplierName) {
-		this.supplierName = supplierName;
+	public void setSuppliername(String suppliername) {
+		this.suppliername = suppliername;
 	}
 
-	public String getSupplierCompany() {
-		return supplierCompany;
+	public String getSuppliercompany() {
+		return suppliercompany;
 	}
 
-	public void setSupplierCompany(String supplierCompany) {
-		this.supplierCompany = supplierCompany;
+	public void setSuppliercompany(String suppliercompany) {
+		this.suppliercompany = suppliercompany;
 	}
 
-	public String getSupplierAdderss() {
-		return supplierAddress;
+	public String getSupplieraddress() {
+		return supplieraddress;
 	}
 
-	public void setSupplierAdderss(String String) {
-		this.supplierAddress = String;
+	public void setSupplieraddress(String supplieraddress) {
+		this.supplieraddress = supplieraddress;
 	}
+
+
 
 	@Override
 	public String toString() {
-		return "Supplier [supplierId=" + supplierId + ", supplierName=" + supplierName + ", supplierCompany="
-				+ supplierCompany + ", supplydDate=" + supplierAddress + "]";
+		return "Supplier [sid=" + sid + ", suppliername=" + suppliername + ", suppliercompany=" + suppliercompany
+				+ ", supplieraddress=" + supplieraddress + "]";
 	}
 
+	
 }

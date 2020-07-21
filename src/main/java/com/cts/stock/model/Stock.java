@@ -8,18 +8,28 @@ import javax.persistence.Table;
 @Table
 public class Stock {
 	@Id
-	private String productId;
+	private String pid;
 	private int quantity;
 
 	public Stock() {
 	}
 
-	public String getProductId() {
-		return productId;
+	
+	
+	public Stock(String pid, int quantity) {
+		super();
+		this.pid = pid;
+		this.quantity = quantity;
 	}
 
-	public void setProductId(String productId) {
-		this.productId = productId;
+
+
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
 	}
 
 	public int getQuantity() {
@@ -30,9 +40,12 @@ public class Stock {
 		this.quantity = quantity;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "Stock [productId=" + productId + ", quantity=" + quantity + "]";
+		return "Stock [pid=" + pid + ", quantity=" + quantity + "]";
 	}
 
+	
 }

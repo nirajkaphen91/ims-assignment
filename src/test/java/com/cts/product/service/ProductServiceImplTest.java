@@ -20,11 +20,8 @@ import com.cts.product.exception.ProductNotFoundException;
 import com.cts.product.model.Product;
 import com.cts.product.repository.ProductRepository;
 
-
-
-
 public class ProductServiceImplTest {
-	
+
 	@Mock
 	private ProductRepository productRepository;
 	private Product product;
@@ -32,23 +29,27 @@ public class ProductServiceImplTest {
 	private ProductServiceImpl ProductService;
 	private List<Product> productList = null;
 	private Optional<Product> options;
-	
+
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 
 		product = new Product();
-		
-		product.setProductId("Sawn123");
-		product.setProductName("Laptop");
-		product.setProductType("OutPutDevice");
-		product.setPrice("57");
-		product.setDescription("computerDevice");
+
+		/*
+		 * private String pid; private String name; private int price; private String
+		 * pdescription;
+		 */
+
+		product.setPid("Sawn123");
+		product.setName("Laptop");
+//		
+		product.setPrice(800);
+//		product.setDescription("computerDevice");
 		productList = new ArrayList<>();
 		productList.add(product);
 		options = Optional.of(product);
 	}
-
 
 	@Test
 	public void testProductServiceImpl() {
@@ -56,37 +57,35 @@ public class ProductServiceImplTest {
 	}
 
 	@Test
-	public void testRegisterProduct()  throws ProductAlreadyExistsException {
-		
+	public void testRegisterProduct() throws ProductAlreadyExistsException {
+
 		when(productRepository.save((Product) any())).thenReturn(product);
 		Product productSaved = ProductService.registerProduct(product);
 		assertEquals(product, productSaved);
 	}
 
 	@Test
-	public void testUpdateProduct()throws ProductNotFoundException  {
-		when(productRepository.findById(product.getProductId())).thenReturn(options);
-		product.setProductName("Laptop");
-		Product fetchproduct = ProductService.updateProduct(product.getProductId(), product);
+	public void testUpdateProduct() throws ProductNotFoundException {
+		when(productRepository.findById(product.getPid())).thenReturn(options);
+		product.setName("Laptop");
+		Product fetchproduct = ProductService.updateProduct(product.getPid(), product);
 		assertEquals(product, fetchproduct);
 	}
 
 	@Test
 	public void testDeleteProduct() throws ProductNotFoundException {
-		when(productRepository.findById(product.getProductId())).thenReturn(options);
-		boolean flag = ProductService.deleteProduct(product.getProductId());
+		when(productRepository.findById(product.getPid())).thenReturn(options);
+		boolean flag = ProductService.deleteProduct(product.getPid());
 		assertEquals(true, flag);
-		//boolean flag = userService.deleteUser(user.getUserId());
+		// boolean flag = userService.deleteUser(user.getUserId());
 	}
 
 	@Test
-	public void testGetProductById()throws ProductNotFoundException {
-		when(productRepository.findById(product.getProductId())).thenReturn(options);
-		Product fetchedProduct= ProductService.getProductById(product.getProductId());
+	public void testGetProductById() throws ProductNotFoundException {
+		when(productRepository.findById(product.getPid())).thenReturn(options);
+		Product fetchedProduct = ProductService.getProductById(product.getPid());
 		assertEquals(product, fetchedProduct);
-		
-		
+
 	}
-	
 
 }

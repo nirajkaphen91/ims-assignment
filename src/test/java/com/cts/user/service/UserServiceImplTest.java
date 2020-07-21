@@ -35,9 +35,9 @@ public class UserServiceImplTest {
 		MockitoAnnotations.initMocks(this);
 
 		user = new User();
-		user.setUserAddedDate(new Date());
-		user.setUserId("John123");
-		user.setUserPassword("johnpass");
+		user.setDate(new Date());
+		user.setId("John123");
+		user.setPassword("johnpass");
 		
 		userList = new ArrayList<>();
 		userList.add(user);
@@ -60,23 +60,23 @@ public class UserServiceImplTest {
 
 	@Test
 	public void updateUser() throws UserNotFoundException {
-		when(userRepository.findById(user.getUserId())).thenReturn(options);
-		user.setFirstName("Niraj001");
-		User fetchuser = userService.updateUser(user.getUserId(), user);
+		when(userRepository.findById(user.getId())).thenReturn(options);
+		user.setName("Niraj001");
+		User fetchuser = userService.updateUser(user.getId(), user);
 		assertEquals(user, fetchuser);
 	}
 
 	@Test
 	public void deleteUserSuccess() throws UserNotFoundException {
-		when(userRepository.findById(user.getUserId())).thenReturn(options);
-		boolean flag = userService.deleteUser(user.getUserId());
+		when(userRepository.findById(user.getId())).thenReturn(options);
+		boolean flag = userService.deleteUser(user.getId());
 		assertEquals(true, flag);
 	}
 
 	@Test
 	public void getUserById() throws UserNotFoundException {
-		when(userRepository.findById(user.getUserId())).thenReturn(options);
-		User fetchedUser = userService.getUserById(user.getUserId());
+		when(userRepository.findById(user.getId())).thenReturn(options);
+		User fetchedUser = userService.getUserById(user.getId());
 		assertEquals(user, fetchedUser);
 	}
 }

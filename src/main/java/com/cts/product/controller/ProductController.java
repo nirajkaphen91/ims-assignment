@@ -15,20 +15,15 @@ import com.cts.product.exception.ProductNotFoundException;
 import com.cts.product.model.Product;
 import com.cts.product.service.ProductService;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
 @RestController
-@Api
 public class ProductController {
 	private ProductService productService;
-	
+
 	@Autowired
 	public ProductController(ProductService productService) {
 		this.productService = productService;
 	}
-	
-	@ApiOperation(value = "Register user using post url: /product/register")
+
 	@PostMapping("/product/register")
 	public ResponseEntity<Product> createUser(@RequestBody Product product) {
 		try {
@@ -39,12 +34,11 @@ public class ProductController {
 		}
 		return new ResponseEntity<Product>(product, HttpStatus.CREATED);
 	}
-	
-	@PutMapping("/product/{id}")
-	@ApiOperation(value = "Update update using url: /product/id")
-	public ResponseEntity<Product> updateProduct(@PathVariable String productId, @RequestBody Product product) {
+
+	@PutMapping("/product/{pid}")
+	public ResponseEntity<Product> updateProduct(@PathVariable String pid, @RequestBody Product product) {
 		try {
-			product = productService.updateProduct(productId, product);
+			product = productService.updateProduct(pid, product);
 			if (product == null) {
 				return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
 			} else {
@@ -56,11 +50,10 @@ public class ProductController {
 		}
 	}
 
-	@DeleteMapping("/product/{id}")
-	@ApiOperation(value = "Delete user using url: /product/id")
-	public ResponseEntity<Void> deleteProduct(@PathVariable String productId) {
+	@DeleteMapping("/product/{pid}")
+	public ResponseEntity<Void> deleteProduct(@PathVariable String pid) {
 		try {
-			boolean flag = productService.deleteProduct(productId);
+			boolean flag = productService.deleteProduct(pid);
 			if (flag) {
 				return new ResponseEntity<Void>(HttpStatus.OK);
 			} else {
@@ -73,7 +66,6 @@ public class ProductController {
 	}
 
 	@GetMapping("/product/{productId}")
-	@ApiOperation(value = "Get product using url: /product/id")
 	public ResponseEntity<Product> getProductById(@PathVariable String productId) {
 		try {
 			Product product = productService.getProductById(productId);

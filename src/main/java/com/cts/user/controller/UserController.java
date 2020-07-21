@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.user.exceptions.UserNotFoundException;
@@ -25,11 +23,8 @@ import com.cts.user.service.UserService;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 
 @RestController
-@Api
 public class UserController {
 	private UserService userService;
 
@@ -38,7 +33,6 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@ApiOperation(value = "Register user using post url: /user/register")
 	@PostMapping("/user/register")
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		try {
@@ -50,7 +44,6 @@ public class UserController {
 		return new ResponseEntity<User>(user, HttpStatus.CREATED);
 	}
 
-	@ApiOperation(value = "Login to auth service using post url: /user/login")
 	@PostMapping("/user/login")
 	public ResponseEntity<?> login(@RequestBody User user) throws ServletException {
 		Map<String, String> map = new HashMap<>();
@@ -58,7 +51,7 @@ public class UserController {
 		String jwtToken = "";
 
 		try {
-			jwtToken = getToken(user.getUserId(), user.getUserPassword());
+			jwtToken = getToken(user.getId(), user.getPassword());
 			map.clear();
 			map.put("message", "Successfully logged in ...");
 			map.put("token", jwtToken);
@@ -73,7 +66,6 @@ public class UserController {
 	}
 
 	@PutMapping("/user/{id}")
-	@ApiOperation(value = "Update user using url: /user/id")
 	public ResponseEntity<User> updateUser(@PathVariable String id, @RequestBody User user) {
 		try {
 			user = userService.updateUser(id, user);
@@ -90,7 +82,6 @@ public class UserController {
 	}
 
 	@DeleteMapping("/user/{id}")
-	@ApiOperation(value = "Delete user using url: /user/id")
 	public ResponseEntity<Void> deleteUser(@PathVariable String id) {
 
 		try {
@@ -108,7 +99,6 @@ public class UserController {
 	}
 
 	@GetMapping("/user/{id}")
-	@ApiOperation(value = "Get user using url: /user/id")
 	public ResponseEntity<User> getUserById(@PathVariable String id) {
 		try {
 			User user = userService.getUserById(id);
@@ -122,11 +112,6 @@ public class UserController {
 			e.printStackTrace();
 			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 		}
-	}
-
-	@RequestMapping(method = RequestMethod.GET, value = "/")
-	public String swaggerUi() {
-		return "redirect:/swagger-ui.html";
 	}
 	
 	public String getToken(String username, String password) throws Exception {

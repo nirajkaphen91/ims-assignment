@@ -10,28 +10,29 @@ import javax.persistence.Table;
 @Table
 public class CustomerInvoice {
 	@Id
-	private String billNo;
+	private String billno;
 	private Date billdate;
-	private String billAmount;
-	private String customerName;
+	private int billamount;
+	private String customername;
 
 	public CustomerInvoice() {
 		this.billdate = new Date();
 	}
-	
-	public CustomerInvoice(String billNo, Date billdate, String billAmount, String customerName) {
-		this.billNo = billNo;
+
+	public CustomerInvoice(String billno, Date billdate, int billamount, String customername) {
+		super();
+		this.billno = billno;
 		this.billdate = billdate;
-		this.billAmount = billAmount;
-		this.customerName = customerName;
+		this.billamount = billamount;
+		this.customername = customername;
 	}
 
-	public String getBillNo() {
-		return billNo;
+	public String getBillno() {
+		return billno;
 	}
 
-	public void setBillNo(String billNo) {
-		this.billNo = billNo;
+	public void setBillno(String billno) {
+		this.billno = billno;
 	}
 
 	public Date getBilldate() {
@@ -42,27 +43,31 @@ public class CustomerInvoice {
 		this.billdate = billdate;
 	}
 
-	public String getBillAmount() {
-		return billAmount;
+	public int getBillamount() {
+		return billamount;
 	}
 
-	public void setBillAmount(String billAmount) {
-		this.billAmount = billAmount;
+	public void setBillamount(int billamount) {
+		this.billamount = billamount;
 	}
 
-	public String getCustomerName() {
-		return customerName;
+	public String getCustomername() {
+		return customername;
 	}
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setCustomername(String customername) {
+		this.customername = customername;
 	}
 
 	@Override
 	public String toString() {
-		return "CustomerInvoice [billNo=" + billNo + ", billdate=" + billdate + ", billAmount=" + billAmount
-				+ ", CustomerName=" + customerName + "]";
+		return "CustomerInvoice [billno=" + billno + ", billdate=" + billdate + ", billamount=" + billamount
+				+ ", customername=" + customername + "]";
 	}
 
+
+	
+	
+	
 	
 }

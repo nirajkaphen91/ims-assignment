@@ -16,11 +16,7 @@ import com.cts.supplier.invoice.exception.SupplierInvoiceNotFoundException;
 import com.cts.supplier.invoice.model.SupplierInvoice;
 import com.cts.supplier.invoice.service.SupplierInvoiceService;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
 @RestController
-@Api
 public class SupplierInvoiceController {
 	
 	private SupplierInvoiceService supplierInvoiceService;
@@ -30,8 +26,6 @@ public class SupplierInvoiceController {
 		this.supplierInvoiceService = supplierInvoiceService;
 	}
 	
-	
-	@ApiOperation(value = "Register SupplierInvoice using post url: /supplierInvoice/register")
 	@PostMapping("/supplierInvoice/register")
 	public ResponseEntity<SupplierInvoice> createSupplierInvoice(@RequestBody SupplierInvoice supplierInvoice) {
 		try {
@@ -44,7 +38,6 @@ public class SupplierInvoiceController {
 	}
 	
 	@PutMapping("/supplierInvoice/{id}")
-	@ApiOperation(value = "Update update using url: /supplierInvoice/id")
 	public ResponseEntity<SupplierInvoice> updateProduct(@PathVariable String supplierID, @RequestBody SupplierInvoice supplierInvoice) {
 		try {
 			supplierInvoice = supplierInvoiceService.updateSupplierInvoice(supplierID, supplierInvoice);
@@ -60,7 +53,6 @@ public class SupplierInvoiceController {
 	}
 
 	@DeleteMapping("/supplierInvoice/{id}")
-	@ApiOperation(value = "Delete supplierInvoice using url: /supplierInvoice/id")
 	public ResponseEntity<Void> deleteProduct(@PathVariable String supplierID) {
 		try {
 			boolean flag = supplierInvoiceService.deleteSupplierInvoice(supplierID);
@@ -76,7 +68,6 @@ public class SupplierInvoiceController {
 	}
 
 	@GetMapping("/supplierInvoice/{supplierID}")
-	@ApiOperation(value = "Get supplierInvoice using url: /supplierInvoice/id")
 	public ResponseEntity<SupplierInvoice> getProductById(@PathVariable String supplierID) {
 		try {
 			SupplierInvoice supplierInvoice = supplierInvoiceService.getSupplierInvoiceById(supplierID);
@@ -92,6 +83,4 @@ public class SupplierInvoiceController {
 			return new ResponseEntity<SupplierInvoice>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
-
 }

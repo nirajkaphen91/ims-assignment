@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+
 import com.cts.stock.exception.StockAlreadyExistsException;
 import com.cts.stock.exception.StockNotFoundException;
 import com.cts.stock.model.Stock;
@@ -33,7 +34,7 @@ public class StockServiceImplTest {
 		MockitoAnnotations.initMocks(this);
 
 		stock = new Stock();
-		stock.setProductId("prod001");
+		stock.setPid("prod001");
 		stock.setQuantity(5);
 
 		stockList = new ArrayList<>();
@@ -50,25 +51,35 @@ public class StockServiceImplTest {
 
 	@Test
 	public void testUpdateStock() throws StockNotFoundException {
-		when(stockRepository.findById(stock.getProductId())).thenReturn(options);
+		when(stockRepository.findById(stock.getPid())).thenReturn(options);
 		stock.setQuantity(5);
-		Stock fetchedStock = StockService.updateStock(stock.getProductId(), stock);
+		Stock fetchedStock = StockService.updateStock(stock.getPid(), stock);
 		assertEquals(stock, fetchedStock);	
 	}
 
 	@Test
 	public void testStockServiceImpl() {
 		//fail("Not yet implemented");
+		
+		
 	}
 	
 	@Test
 	public void testDeleteStock() throws StockNotFoundException {
 		//fail("Not yet implemented");
+		
+		when(stockRepository.findById(stock.getPid())).thenReturn(options);
+		boolean flag = StockService.deleteStock(stock.getPid());
+		assertEquals(true, flag);
 	}
 
 	@Test
-	public void testGetStockById() {
+	public void testGetStockById() throws StockNotFoundException {
 		//fail("Not yet implemented");
+		when(stockRepository.findById(stock.getPid())).thenReturn(options);
+		Stock fetchedstock = StockService.getStockById(stock.getPid());
+		assertEquals(stock, fetchedstock);
+
 	}
 
 }
