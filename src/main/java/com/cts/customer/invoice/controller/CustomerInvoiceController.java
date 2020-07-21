@@ -26,7 +26,7 @@ public class CustomerInvoiceController {
 		this.customerInvoiceService = customerInvoiceService;
 	}
 
-	@PostMapping("/customerInvoice/register")
+	@PostMapping("/customerinvoice/register")
 	public ResponseEntity<CustomerInvoice> createCustomerInvoice(@RequestBody CustomerInvoice customerInvoice) {
 		try {
 			customerInvoiceService.registerCustomerInvoice(customerInvoice);
@@ -37,11 +37,11 @@ public class CustomerInvoiceController {
 		return new ResponseEntity<CustomerInvoice>(customerInvoice, HttpStatus.CREATED);
 	}
 
-	@PutMapping("/customerInvoice/{id}")
-	public ResponseEntity<CustomerInvoice> updateProduct(@PathVariable String customerInvoiceId,
+	@PutMapping("/customerinvoice/{billno}")
+	public ResponseEntity<CustomerInvoice> updateProduct(@PathVariable String billno,
 			@RequestBody CustomerInvoice customerInvoice) {
 		try {
-			customerInvoice = customerInvoiceService.updateCustomerInvoice(customerInvoiceId, customerInvoice);
+			customerInvoice = customerInvoiceService.updateCustomerInvoice(billno, customerInvoice);
 			if (customerInvoice == null) {
 				return new ResponseEntity<CustomerInvoice>(HttpStatus.NOT_FOUND);
 			} else {
@@ -53,10 +53,10 @@ public class CustomerInvoiceController {
 		}
 	}
 
-	@DeleteMapping("/customerInvoice/{id}")
-	public ResponseEntity<Void> deleteProduct(@PathVariable String customerInvoiceId) {
+	@DeleteMapping("/customerinvoice/{billno}")
+	public ResponseEntity<Void> deleteProduct(@PathVariable String billno) {
 		try {
-			boolean flag = customerInvoiceService.deleteCustomerInvoice(customerInvoiceId);
+			boolean flag = customerInvoiceService.deleteCustomerInvoice(billno);
 			if (flag) {
 				return new ResponseEntity<Void>(HttpStatus.OK);
 			} else {
@@ -68,10 +68,10 @@ public class CustomerInvoiceController {
 		}
 	}
 
-	@GetMapping("/customerInvoice/{customerInvoiceId}")
-	public ResponseEntity<CustomerInvoice> getProductById(@PathVariable String customerInvoiceId) {
+	@GetMapping("/customerinvoice/{billno}")
+	public ResponseEntity<CustomerInvoice> getProductById(@PathVariable String billno) {
 		try {
-			CustomerInvoice customerInvoice = customerInvoiceService.getCustomerInvoiceById(customerInvoiceId);
+			CustomerInvoice customerInvoice = customerInvoiceService.getCustomerInvoiceById(billno);
 			if (customerInvoice == null) {
 				return new ResponseEntity<CustomerInvoice>(HttpStatus.NOT_FOUND);
 			} else {

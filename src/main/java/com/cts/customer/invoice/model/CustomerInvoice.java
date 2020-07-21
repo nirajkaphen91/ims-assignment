@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name ="customerinvoice")
 public class CustomerInvoice {
 	@Id
 	private String billno;
