@@ -26,7 +26,7 @@ public class SupplierInvoiceController {
 		this.supplierInvoiceService = supplierInvoiceService;
 	}
 	
-	@PostMapping("/supplierInvoice/register")
+	@PostMapping("/supplierinvoice/register")
 	public ResponseEntity<SupplierInvoice> createSupplierInvoice(@RequestBody SupplierInvoice supplierInvoice) {
 		try {
 			supplierInvoiceService.registerSupplierInvoice(supplierInvoice);
@@ -37,10 +37,10 @@ public class SupplierInvoiceController {
 		return new ResponseEntity<SupplierInvoice>(supplierInvoice, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/supplierInvoice/{id}")
-	public ResponseEntity<SupplierInvoice> updateProduct(@PathVariable String supplierID, @RequestBody SupplierInvoice supplierInvoice) {
+	@PutMapping("/supplierinvoice/{sid}")
+	public ResponseEntity<SupplierInvoice> updateProduct(@PathVariable String sid, @RequestBody SupplierInvoice supplierInvoice) {
 		try {
-			supplierInvoice = supplierInvoiceService.updateSupplierInvoice(supplierID, supplierInvoice);
+			supplierInvoice = supplierInvoiceService.updateSupplierInvoice(sid, supplierInvoice);
 			if (supplierInvoice == null) {
 				return new ResponseEntity<SupplierInvoice>(HttpStatus.NOT_FOUND);
 			} else {
@@ -52,10 +52,10 @@ public class SupplierInvoiceController {
 		}
 	}
 
-	@DeleteMapping("/supplierInvoice/{id}")
-	public ResponseEntity<Void> deleteProduct(@PathVariable String supplierID) {
+	@DeleteMapping("/supplierinvoice/{sid}")
+	public ResponseEntity<Void> deleteProduct(@PathVariable String sid) {
 		try {
-			boolean flag = supplierInvoiceService.deleteSupplierInvoice(supplierID);
+			boolean flag = supplierInvoiceService.deleteSupplierInvoice(sid);
 			if (flag) {
 				return new ResponseEntity<Void>(HttpStatus.OK);
 			} else {
@@ -67,10 +67,10 @@ public class SupplierInvoiceController {
 		}
 	}
 
-	@GetMapping("/supplierInvoice/{supplierID}")
-	public ResponseEntity<SupplierInvoice> getProductById(@PathVariable String supplierID) {
+	@GetMapping("/supplierinvoice/{sid}")
+	public ResponseEntity<SupplierInvoice> getProductById(@PathVariable String sid) {
 		try {
-			SupplierInvoice supplierInvoice = supplierInvoiceService.getSupplierInvoiceById(supplierID);
+			SupplierInvoice supplierInvoice = supplierInvoiceService.getSupplierInvoiceById(sid);
 					//(supplierID);
 			if (supplierInvoice == null) {
 				return new ResponseEntity<SupplierInvoice>(HttpStatus.NOT_FOUND);

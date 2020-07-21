@@ -5,64 +5,70 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@Table
+@Table(name ="supplierinvoice")
 public class SupplierInvoice {
 	
 	@Id
-	private String refrenceID;
-	private String supplierID;
-	private Date supplyDate;
-	private String productID;
+	private String refid;
+	private String supplierid;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date supplydate;
+	private String productid;
 	private String productquantity;
-	private String productPrice;
+	private int productprice;
 
 	public SupplierInvoice() {
-		this.supplyDate = new Date();
+		this.supplydate = new Date();
 	}
 
-	public SupplierInvoice(String refrenceID, String supplierID, Date supplyDate, String productID,
-			String productquantity, String productPrice) {
+	public SupplierInvoice(String refid, String supplierid, Date supplyDate, String productid, String productquantity,
+			int productprice) {
 		super();
-		this.refrenceID = refrenceID;
-		this.supplierID = supplierID;
-		this.supplyDate = supplyDate;
-		this.productID = productID;
+		this.refid = refid;
+		this.supplierid = supplierid;
+		this.supplydate = supplyDate;
+		this.productid = productid;
 		this.productquantity = productquantity;
-		this.productPrice = productPrice;
+		this.productprice = productprice;
 	}
 	
-	public String getRefrenceID() {
-		return refrenceID;
+	
+
+	public String getRefid() {
+		return refid;
 	}
 
-	public void setRefrenceID(String refrenceID) {
-		this.refrenceID = refrenceID;
+	public void setRefid(String refid) {
+		this.refid = refid;
 	}
 
-	public String getSupplierID() {
-		return supplierID;
+	public String getSupplierid() {
+		return supplierid;
 	}
 
-	public void setSupplierID(String supplierID) {
-		this.supplierID = supplierID;
+	public void setSupplierid(String supplierid) {
+		this.supplierid = supplierid;
 	}
 
 	public Date getSupplyDate() {
-		return supplyDate;
+		return supplydate;
 	}
 
 	public void setSupplyDate(Date supplyDate) {
-		this.supplyDate = supplyDate;
+		this.supplydate = supplyDate;
 	}
 
-	public String getProductID() {
-		return productID;
+	public String getProductid() {
+		return productid;
 	}
 
-	public void setProductID(String productID) {
-		this.productID = productID;
+	public void setProductid(String productid) {
+		this.productid = productid;
 	}
 
 	public String getProductquantity() {
@@ -73,18 +79,22 @@ public class SupplierInvoice {
 		this.productquantity = productquantity;
 	}
 
-	public String getProductPrice() {
-		return productPrice;
+	public int getProductprice() {
+		return productprice;
 	}
 
-	public void setProductPrice(String productPrice) {
-		this.productPrice = productPrice;
+	public void setProductprice(int productprice) {
+		this.productprice = productprice;
 	}
 
 	@Override
 	public String toString() {
-		return "SupplierInvoice [refrenceID=" + refrenceID + ", supplierID=" + supplierID + ", supplyDate=" + supplyDate
-				+ ", productID=" + productID + ", productquantity=" + productquantity + ", productPrice=" + productPrice
+		return "SupplierInvoice [refid=" + refid + ", supplierid=" + supplierid + ", supplydate=" + supplydate
+				+ ", productid=" + productid + ", productquantity=" + productquantity + ", productprice=" + productprice
 				+ "]";
 	}
+
+	
+
+	
 }
