@@ -2,6 +2,8 @@ package com.cts.product.service;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +11,11 @@ import com.cts.product.exception.ProductAlreadyExistsException;
 import com.cts.product.exception.ProductNotFoundException;
 import com.cts.product.model.Product;
 import com.cts.product.repository.ProductRepository;
+import com.cts.stock.service.StockServiceImpl;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+	private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
 	private ProductRepository productRepository;
 
 	@Autowired
@@ -41,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
 		try {
 			productRepository.deleteById(productId);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return false;
 		}
 		return true;

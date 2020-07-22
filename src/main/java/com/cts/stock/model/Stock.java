@@ -2,7 +2,10 @@ package com.cts.stock.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table
@@ -14,15 +17,11 @@ public class Stock {
 	public Stock() {
 	}
 
-	
-	
 	public Stock(String pid, int quantity) {
 		super();
 		this.pid = pid;
 		this.quantity = quantity;
 	}
-
-
 
 	public String getPid() {
 		return pid;
@@ -40,12 +39,9 @@ public class Stock {
 		this.quantity = quantity;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Stock [pid=" + pid + ", quantity=" + quantity + "]";
 	}
 
-	
 }

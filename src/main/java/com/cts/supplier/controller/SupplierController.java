@@ -1,5 +1,7 @@
 package com.cts.supplier.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,12 +13,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.cts.supplier.exception.SupplierNotFoundException;
 import com.cts.supplier.model.Supplier;
 import com.cts.supplier.service.SupplierService;
 
 @RestController
 public class SupplierController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(SupplierController.class);
 	
 	private SupplierService supplierService;
 
@@ -31,7 +35,7 @@ public class SupplierController {
 		try {
 			supplierService.registerSupplier(supplier);
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			LOGGER.error(ex.getMessage());
 			return new ResponseEntity<Supplier>(HttpStatus.CONFLICT);
 		}
 		return new ResponseEntity<Supplier>(supplier, HttpStatus.CREATED);
@@ -48,7 +52,7 @@ public class SupplierController {
 				return new ResponseEntity<Supplier>(supplier, HttpStatus.OK);
 			}
 		} catch (SupplierNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return new ResponseEntity<Supplier>(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -64,7 +68,7 @@ public class SupplierController {
 				return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 			}
 		} catch (SupplierNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -81,7 +85,7 @@ public class SupplierController {
 			}
 
 		} catch (SupplierNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return new ResponseEntity<Supplier>(HttpStatus.NOT_FOUND);
 		}
 	}

@@ -57,7 +57,7 @@ public class StockServiceImplTest {
 		assertEquals(stock, fetchedStock);	
 	}
 
-	@Test
+	//@Test
 	public void testStockServiceImpl() {
 		//fail("Not yet implemented");
 		

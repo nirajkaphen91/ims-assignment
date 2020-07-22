@@ -1,5 +1,7 @@
 package com.cts.stock.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,9 +10,11 @@ import com.cts.stock.exception.StockAlreadyExistsException;
 import com.cts.stock.exception.StockNotFoundException;
 import com.cts.stock.model.Stock;
 import com.cts.stock.repository.StockRepository;
+import com.cts.supplier.invoice.service.SupplierInvoiceServiceImpl;
 
 @Service
 public class StockServiceImpl implements StockService {
+	private static final Logger LOGGER = LoggerFactory.getLogger(StockServiceImpl.class);
 	
 	private StockRepository StockRepository;
 	
@@ -41,7 +45,7 @@ public class StockServiceImpl implements StockService {
 		try {
 			StockRepository.deleteById(stockId);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return false;
 		}
 		return true;
@@ -49,7 +53,7 @@ public class StockServiceImpl implements StockService {
 
 	@Override
 	public Stock getStockById(String stockId) throws StockNotFoundException {
-		// TODO Auto-generated method stub
+		
 		return StockRepository.findById(stockId).get();
 	}
 

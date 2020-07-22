@@ -2,6 +2,8 @@ package com.cts.customer.invoice.service;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +11,11 @@ import com.cts.customer.invoice.exception.CustomerInvoiceAlreadyExistsException;
 import com.cts.customer.invoice.exception.CustomerInvoiceNotFoundException;
 import com.cts.customer.invoice.model.CustomerInvoice;
 import com.cts.customer.invoice.repository.CustomerInvoiceRepository;
+import com.cts.product.service.ProductServiceImpl;
 
 @Service
 public class CustomerInvoiceServiceImpl implements CustomerInvoiceService {
+	private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
 
 	private CustomerInvoiceRepository customerInvoiceRepository;
 
@@ -46,7 +50,7 @@ public class CustomerInvoiceServiceImpl implements CustomerInvoiceService {
 		try {
 			customerInvoiceRepository.deleteById(customerInvoiceId);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return false;
 		}
 		return true;

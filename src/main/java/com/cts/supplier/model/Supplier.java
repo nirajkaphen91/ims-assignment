@@ -16,8 +16,6 @@ public class Supplier {
 	public Supplier() {
 	}
 
-	
-	
 	public Supplier(String sid, String suppliername, String suppliercompany, String supplieraddress) {
 		super();
 		this.sid = sid;
@@ -25,8 +23,6 @@ public class Supplier {
 		this.suppliercompany = suppliercompany;
 		this.supplieraddress = supplieraddress;
 	}
-
-
 
 	public String getSid() {
 		return sid;
@@ -60,13 +56,10 @@ public class Supplier {
 		this.supplieraddress = supplieraddress;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Supplier [sid=" + sid + ", suppliername=" + suppliername + ", suppliercompany=" + suppliercompany
 				+ ", supplieraddress=" + supplieraddress + "]";
 	}
 
-	
 }

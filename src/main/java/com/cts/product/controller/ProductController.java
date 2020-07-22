@@ -1,5 +1,7 @@
 package com.cts.product.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,12 +13,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.customer.invoice.controller.CustomerInvoiceController;
 import com.cts.product.exception.ProductNotFoundException;
 import com.cts.product.model.Product;
 import com.cts.product.service.ProductService;
 
 @RestController
 public class ProductController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(CustomerInvoiceController.class);
 	private ProductService productService;
 
 	@Autowired
@@ -29,7 +33,7 @@ public class ProductController {
 		try {
 			productService.registerProduct(product);
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			LOGGER.error(ex.getMessage());
 			return new ResponseEntity<Product>(HttpStatus.CONFLICT);
 		}
 		return new ResponseEntity<Product>(product, HttpStatus.CREATED);
@@ -45,7 +49,7 @@ public class ProductController {
 				return new ResponseEntity<Product>(product, HttpStatus.OK);
 			}
 		} catch (ProductNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -60,7 +64,7 @@ public class ProductController {
 				return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 			}
 		} catch (ProductNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -76,7 +80,7 @@ public class ProductController {
 			}
 
 		} catch (ProductNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
 		}
 	}

@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @RestController
 public class UserController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	private UserService userService;
 
 	@Autowired
@@ -38,7 +41,7 @@ public class UserController {
 		try {
 			userService.registerUser(user);
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			LOGGER.error(ex.getMessage());
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);
 		}
 		return new ResponseEntity<User>(user, HttpStatus.CREATED);
@@ -76,7 +79,7 @@ public class UserController {
 				return new ResponseEntity<User>(user, HttpStatus.OK);
 			}
 		} catch (UserNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -93,7 +96,7 @@ public class UserController {
 				return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 			}
 		} catch (UserNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -109,11 +112,11 @@ public class UserController {
 			}
 
 		} catch (UserNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	public String getToken(String username, String password) throws Exception {
 
 		if (username == null || password == null) {

@@ -1,5 +1,7 @@
 package com.cts.stock.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,7 @@ import com.cts.stock.service.StockService;
 
 @RestController
 public class StockController {
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(StockController.class);
 	private StockService stockService;
 
 	@Autowired
@@ -30,7 +32,7 @@ public class StockController {
 		try {
 			stockService.registerStock(stock);
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			LOGGER.error(ex.getMessage());
 			return new ResponseEntity<Stock>(HttpStatus.CONFLICT);
 		}
 		return new ResponseEntity<Stock>(stock, HttpStatus.CREATED);
@@ -47,7 +49,7 @@ public class StockController {
 				return new ResponseEntity<Stock>(stock, HttpStatus.OK);
 			}
 		} catch (StockNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return new ResponseEntity<Stock>(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -63,7 +65,7 @@ public class StockController {
 				return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 			}
 		} catch (StockNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -80,7 +82,7 @@ public class StockController {
 			}
 
 		} catch (StockNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			return new ResponseEntity<Stock>(HttpStatus.NOT_FOUND);
 		}
 	}
